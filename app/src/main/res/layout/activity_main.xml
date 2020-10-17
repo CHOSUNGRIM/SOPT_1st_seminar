@@ -73,6 +73,16 @@
         app:layout_constraintEnd_toEndOf="@+id/editText2"
         app:layout_constraintTop_toBottomOf="@+id/editText2"/>
 
+    <Button
+        android:id="@+id/Login_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그인"
+        android:textSize="15sp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/SignUp_btn"
+        app:layout_constraintTop_toTopOf="@+id/SignUp_btn" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

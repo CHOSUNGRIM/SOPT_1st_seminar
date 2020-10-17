@@ -16,10 +16,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        btn_SignUp.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivityForResult(intent,100)
+        Login_btn.setOnClickListener {
+            val intent = Intent(this, RecyclerViewActivity::class.java)
+            startActivity(intent)
         }
-
     }
 }
