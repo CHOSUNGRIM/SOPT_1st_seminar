@@ -11,7 +11,7 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
 
         btn_SignUp.setOnClickListener {
-            if (name_edt.text.isNullOrBlank() || id_edt.text.isNullOrBlank() || pw_edt.text.isNullOrBlank()) {
+            if (SignUp_name_edt.text.isNullOrBlank() || SignUp_id_edt.text.isNullOrBlank() || SignUp_pw_edt.text.isNullOrBlank()) {
                 Toast.makeText(this, "모든 칸에 내용을 입력해 주세요", Toast.LENGTH_SHORT).show()
             }
             else {

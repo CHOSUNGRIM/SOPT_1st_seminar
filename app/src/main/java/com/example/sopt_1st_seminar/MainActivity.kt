@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,6 +14,11 @@ class MainActivity : AppCompatActivity() {
         SignUp_btn.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
+        }
+
+        btn_SignUp.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivityForResult(intent,100)
         }
 
     }
