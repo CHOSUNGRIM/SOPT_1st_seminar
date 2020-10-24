@@ -11,13 +11,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        SignUp_btn.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
-        }
-
-        Login_btn.setOnClickListener {
-            val intent = Intent(this, RecyclerViewActivity::class.java)
+        sopt_btn.setOnClickListener {
+            val intent = Intent (this, LoginActivity::class.java)
             startActivity(intent)
         }
     }

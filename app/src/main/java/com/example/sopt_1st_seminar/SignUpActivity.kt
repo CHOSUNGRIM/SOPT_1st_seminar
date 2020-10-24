@@ -1,5 +1,6 @@
 package com.example.sopt_1st_seminar
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -16,7 +17,11 @@ class SignUpActivity : AppCompatActivity() {
             }
             else {
                 Toast.makeText(this, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show()
+
             }
+
+            val intent = Intent (this, SignUpActivity::class.java)
+            startActivityForResult(intent, 100)
             }
         }
     }
