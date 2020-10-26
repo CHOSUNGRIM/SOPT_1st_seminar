@@ -36,7 +36,7 @@ btn_SignUp.setOnClickListener {
 * startActivityForResult()  
 회원 가입에 성공했을 때, *SignUpActivity* 에서 입력 받은 아이디와 비밀번호를 로그인 화면에 입력해준다.  
 
-  - request code로 *SignUpCode* 를 100이라 한다.
+-request code로 *SignUpCode* 를 100이라 한다.
 
 <pre>
 <code>
@@ -45,7 +45,7 @@ val SignUpCode = 100
 </pre>
 
 
-    - *loginActivity*에서 *SignUpActivity*를 **startAcrivityForResult**를 이용하여 불러낸다.  
+-*loginActivity*에서 *SignUpActivity*를 **startAcrivityForResult**를 이용하여 불러낸다.  
 startActivityForResult는 불러낸 액티비티가 종료될 때 결과값을 가지고 돌아옴
 
 <pre>
