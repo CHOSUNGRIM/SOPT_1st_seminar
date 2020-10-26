@@ -6,10 +6,13 @@
 #### 필수 과제 & 성장 과제 1 
 <img src="https://user-images.githubusercontent.com/72273531/97198951-c9cb4b00-17f2-11eb-94ee-b6b63882e95e.gif" width="230" height="500">
 
-* ToastMessage 구현  
+
+* ToastMessage  
 *SignUpActivity* 에서 회원가입 버튼을 눌렀을 때,  
 EditTextView에 데이터가 모두 들어있으면 회원가입이 완료되었다는 메시지 표시  
 모두 들어있지 않으면 모든 칸에 내용을 입력하라는 메시지 표시  
+
+
 <pre>
 <code>
 btn_SignUp.setOnClickListener {
@@ -26,6 +29,41 @@ btn_SignUp.setOnClickListener {
             } 
 </code>
 </pre>
+
+
+* startActivityForResult()  
+회원 가입에 성공했을 때, *SignUpActivity* 에서 입력 받은 아이디와 비밀번호를 로그인 화면에 입력해준다.  
+
+
+request code로 *SignUpCode* 를 100이라 한다.
+
+<pre>
+<code>
+val SignUpCode = 100
+</code>
+</pre>
+
+
+*loginActivity*에서 *SignUpActivity*를 **startAcrivityForResult**를 이용하여 불러낸다.  
+startActivityForResult는 
+
+<pre>
+<code>
+SignUp_btn.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivityForResult(intent, SignUpCode)
+        }
+</code>
+</pre>
+
+
+override 해줌..
+<pre>
+<code>
+
+</code>
+</pre>
+
 
 ## ✔2차 세미나 과제
 ### 📲구현 화면
