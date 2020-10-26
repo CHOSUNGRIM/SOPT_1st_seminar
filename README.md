@@ -1,8 +1,8 @@
-# SOPT_1st_seminar
-## 1차 세미나 과제
-### 구현 화면
-#### 필수 과제 & 성장 과제 1
-<img src="https://user-images.githubusercontent.com/72273531/97198951-c9cb4b00-17f2-11eb-94ee-b6b63882e95e.gif" width="300" height="620">
+# 💚SOPT_27th_Android💚
+## ✔1차 세미나 과제
+### 📲구현 화면
+#### 필수 과제 & 성장 과제 1 
+<img src="https://user-images.githubusercontent.com/72273531/97198951-c9cb4b00-17f2-11eb-94ee-b6b63882e95e.gif" width="180" height="400">
 
 <pre>
 <code>
@@ -20,3 +20,8 @@ btn_SignUp.setOnClickListener {
             } 
 </code>
 </pre>
+
+## ✔2차 세미나 과제
+### 📲구현 화면
+#### 필수 과제 & 성장 과제 1
+<img src="https://user-images.githubusercontent.com/72273531/97203284-f2097880-17f7-11eb-95fd-28c49254e76d.jpg" width="600" height="400">
