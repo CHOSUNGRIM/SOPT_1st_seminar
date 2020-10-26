@@ -15,8 +15,7 @@ EditTextView에 데이터가 모두 들어있으면 회원가입이 완료되었
 모두 들어있지 않으면 모든 칸에 내용을 입력하라는 메시지 표시  
 
 
-<pre>
-<code>
+｀｀｀Kotlin
 btn_SignUp.setOnClickListener {
             if (SignUp_name_edt.text.isNullOrBlank() || SignUp_id_edt.text.isNullOrBlank() || SignUp_pw_edt.text.isNullOrBlank()) {
                 Toast.makeText(this, "모든 칸에 내용을 입력해 주세요", Toast.LENGTH_SHORT).show()
@@ -29,8 +28,7 @@ btn_SignUp.setOnClickListener {
                 setResult(Activity.RESULT_OK,intent)
                 finish()
 } 
-</code>
-</pre>
+｀｀｀
 
 
 
