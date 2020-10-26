@@ -77,6 +77,7 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
         }
 }
 ```
+[🔝](https://github.com/CHOSUNGRIM/SOPT_1st_seminar#sopt_27th_android)
 
 ---
 ## 🤍2차 세미나 과제🤍
@@ -85,6 +86,43 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 <img src="https://user-images.githubusercontent.com/72273531/97203284-f2097880-17f7-11eb-95fd-28c49254e76d.jpg" width="600" height="400">
 
 #### 🟩 필수 과제 ( RecyclerView )  
+동일한 형태의 뷰 + 다른 데이터를 다량 보여줄 때 사용  
+커스텀이 편함  
+가로 / 세로 방향 지원 - LinearLayoutManager  
+격자 방향 지원 - GridLayoutManager  
+ItemAnimator를 이용한 애니메이션
+
+1. 아이템 xml 작성  
+-*profile_item_list.xml*을 만들었다.
+
+2. 아이템에 대한 데이터 객체 만들기  
+-*SampleDate.kt*을 만들었다.
+```Kotlin
+data class SampleData(
+    val title : String,
+    val subTitle : String,
+    val date : String,
+    val description : String
+```
+3. ViewHolder 만들기  
+-데이터를 뷰에 뿌려주는 역할  
+-*SampleViewHolder.kt*을 만들었다.
+```Kotlin
+class SampleViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView){
+    private val title : TextView = itemView.findViewById(R.id.item_title)
+    private val subTitle : TextView = itemView.findViewById(R.id.item_subtitle)
+
+    fun onBind(data : SampleData){
+        title.text = data.title
+        subTitle.text = data.subTitle
+    }
+}
+```
+4. Adapter 만들기
+-데이터를 각 아이템들에게 전달하는 역할
+5. RecyclerView 배치
+6. 배치 방향 확인
+7. Adapter 갱신
 
 #### 🟩 성장 과제1 ( GridLinearLayout )  
 아이템을 격자 형태로 보여준다.  
@@ -92,3 +130,4 @@ GridLayoutManager(this, 가로줄 하나에 들어갈 아이템 수, RecyclerVie
 ```Kotlin
 main_rcv.layoutManager = GridLayoutManager(this,3,RecyclerView.VERTICAL,false)
 ```
+[🔝](https://github.com/CHOSUNGRIM/SOPT_1st_seminar#sopt_27th_android)
