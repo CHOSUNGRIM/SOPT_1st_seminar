@@ -46,14 +46,28 @@ val SignUpCode = 100
 
 
 -*loginActivity*에서 *SignUpActivity*를 **startAcrivityForResult**를 이용하여 불러낸다.  
-startActivityForResult는 불러낸 액티비티가 종료될 때 결과값을 가지고 돌아옴
-
+startActivityForResult는 불러낸 액티비티가 종료될 때 결과값을 가지고 돌아온다.
 <pre>
 <code>
 SignUp_btn.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivityForResult(intent, SignUpCode)
 }
+</code>
+</pre>
+
+
+-불러낸 액티비티인 *SignUpActivity*에서 회원가입에 성공하면  
+**putExtra**를 통해 EditTextView를 통해 받은 데이터를 intent에 넣어주고  
+**setResult**를 통해 *RESULT_OK* 와 데이터가 담긴 intent를 넣어준 후에
+**finish**를 통해 불러낸 액티비티를 종료하고 *LoginActivity*로 돌아간다.
+<pre>
+<code>
+val intent = Intent()
+intent.putExtra("id",SignUp_id_edt.text.toString())
+intent.putExtra("pw",SignUp_pw_edt.text.toString())
+setResult(Activity.RESULT_OK,intent)
+finish()
 </code>
 </pre>
 
