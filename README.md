@@ -53,7 +53,7 @@ startActivityForResult는 불러낸 액티비티가 종료될 때 결과값을 �
 SignUp_btn.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivityForResult(intent, SignUpCode)
-        }
+}
 </code>
 </pre>
 
@@ -61,7 +61,17 @@ SignUp_btn.setOnClickListener {
   - override 해줌..
 <pre>
 <code>
+override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode==SignUpCode && resultCode== Activity.RESULT_OK){
+            val id = data?.getStringExtra("id") ?: return
+            val pw = data.getStringExtra("pw")
 
+            login_id_edt.setText(id)
+            login_pw_edt.setText(pw)
+
+        }
+}
 </code>
 </pre>
 
