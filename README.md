@@ -50,7 +50,7 @@ SignUp_btn.setOnClickListener {
 
 3. 불러낸 액티비티인 *SignUpActivity*에서 회원가입에 성공하면  
 **putExtra**를 통해 EditTextView를 통해 받은 데이터를 intent에 넣어주고  
-**setResult**를 통해 *RESULT_OK* 와 데이터가 담긴 intent를 넣어준 후에
+**setResult**를 통해 *RESULT_OK* 와 데이터가 담긴 intent를 넣어준 후에  
 **finish**를 통해 불러낸 액티비티를 종료하고 *LoginActivity*로 돌아간다.
 ```Kotlin
 val intent = Intent()
