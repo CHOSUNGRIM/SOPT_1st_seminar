@@ -9,7 +9,7 @@
 <img src="https://user-images.githubusercontent.com/72273531/97198951-c9cb4b00-17f2-11eb-94ee-b6b63882e95e.gif" width="230" height="500">
 
 
-##### 🟩 필수 과제 ( setOnClickListener & ToastMessage & 화면 이동 )  
+#### 🟩 필수 과제 ( setOnClickListener & ToastMessage & 화면 이동 )  
 *SignUpActivity* 에서 회원가입 버튼을 눌렀을 때,  
 EditTextView에 데이터가 모두 들어있으면 회원가입이 완료되었다는 메시지 표시  
 모두 들어있지 않으면 모든 칸에 내용을 입력하라는 메시지 표시  
@@ -35,7 +35,7 @@ btn_SignUp.setOnClickListener {
 
 
 
-🟩 성장 과제1 ( startActivityForResult() )  
+##### 🟩 성장 과제1 ( startActivityForResult() )  
 회원 가입에 성공했을 때, *SignUpActivity* 에서 입력 받은 아이디와 비밀번호를 로그인 화면에 입력해준다.  
 
 -request code로 *SignUpCode* 를 100이라 한다.
@@ -98,9 +98,9 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 #### 필수 과제 & 성장 과제 1
 <img src="https://user-images.githubusercontent.com/72273531/97203284-f2097880-17f7-11eb-95fd-28c49254e76d.jpg" width="600" height="400">
 
-🟩 필수 과제 ( RecyclerView )  
+#### 🟩 필수 과제 ( RecyclerView )  
 
-🟩 성장 과제1 ( GridLinearLayout )  
+#### 🟩 성장 과제1 ( GridLinearLayout )  
 아이템을 격자 형태로 보여준다.
 GridLayoutManager(this, 가로줄 하나에 들어갈 아이템 수, RecyclerView.VERTICAL, false)
 <pre>
