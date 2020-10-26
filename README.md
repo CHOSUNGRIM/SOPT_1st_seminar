@@ -14,8 +14,7 @@
 EditTextView에 데이터가 모두 들어있으면 회원가입이 완료되었다는 메시지 표시  
 모두 들어있지 않으면 모든 칸에 내용을 입력하라는 메시지 표시  
 
-<pre>
-<code>
+```Kotlin
 btn_SignUp.setOnClickListener {
             if (SignUp_name_edt.text.isNullOrBlank() || SignUp_id_edt.text.isNullOrBlank() || SignUp_pw_edt.text.isNullOrBlank()) {
                 Toast.makeText(this, "모든 칸에 내용을 입력해 주세요", Toast.LENGTH_SHORT).show()
@@ -28,8 +27,7 @@ btn_SignUp.setOnClickListener {
                 setResult(Activity.RESULT_OK,intent)
                 finish()
 } 
-</code>
-</pre>
+```
 
 
 
@@ -73,7 +71,7 @@ finish()
 
 
 -돌아온 *LoginActivity*에서 **onActivityResult**를 통해 requestCodedhk resultCode가 각각 *SignUpCode*와 *RESULT_OK*와 일치하면
-**getStringExtra**를 통해 변수에 데이터 값을 넣어주고, **setText**를 통해 EditTextView에 데이터를 넣어준다..
+**getStringExtra**를 통해 변수에 데이터 값을 넣어주고, **setText**를 통해 EditTextView에 데이터를 넣어준다.
 <pre>
 <code>
 override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -99,7 +97,7 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 #### 🟩 필수 과제 ( RecyclerView )  
 
 #### 🟩 성장 과제1 ( GridLinearLayout )  
-아이템을 격자 형태로 보여준다.
+아이템을 격자 형태로 보여준다.  
 GridLayoutManager(this, 가로줄 하나에 들어갈 아이템 수, RecyclerView.VERTICAL, false)
 <pre>
 <code>
