@@ -75,7 +75,7 @@ finish()
 
 
 -돌아온 *LoginActivity*에서 **onActivityResult**를 통해 requestCodedhk resultCode가 각각 *SignUpCode*와 *RESULT_OK*와 일치하면
-**getStringExtra**를 통해 데이터 값을 넣어준다.
+**getStringExtra**를 통해 변수에 데이터 값을 넣어주고, **setText**를 통해 EditTextView에 데이터를 넣어준다..
 <pre>
 <code>
 override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
