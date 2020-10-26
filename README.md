@@ -28,7 +28,7 @@ btn_SignUp.setOnClickListener {
                 intent.putExtra("pw",SignUp_pw_edt.text.toString())
                 setResult(Activity.RESULT_OK,intent)
                 finish()
-            } 
+} 
 </code>
 </pre>
 
@@ -45,7 +45,7 @@ val SignUpCode = 100
 </pre>
 
 
-  - *loginActivity*에서 *SignUpActivity*를 **startAcrivityForResult**를 이용하여 불러낸다.  
+    - *loginActivity*에서 *SignUpActivity*를 **startAcrivityForResult**를 이용하여 불러낸다.  
 startActivityForResult는 불러낸 액티비티가 종료될 때 결과값을 가지고 돌아옴
 
 <pre>
