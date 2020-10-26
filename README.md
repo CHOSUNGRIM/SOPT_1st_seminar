@@ -2,14 +2,14 @@
 * [1차 세미나 과제](https://github.com/CHOSUNGRIM/SOPT_1st_seminar/blob/master/README.md#1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B3%BC%EC%A0%9C)
 * [2차 세미나 과제](https://github.com/CHOSUNGRIM/SOPT_1st_seminar#2%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B3%BC%EC%A0%9C)
 
-
+---
 ## ✔1차 세미나 과제
 ### 📲 구현 화면
 #### 필수 과제 & 성장 과제 1 
 <img src="https://user-images.githubusercontent.com/72273531/97198951-c9cb4b00-17f2-11eb-94ee-b6b63882e95e.gif" width="230" height="500">
 
 
-🟩 필수 과제 ( ToastMessage )
+🟩 필수 과제 ( ToastMessage )  
 *SignUpActivity* 에서 회원가입 버튼을 눌렀을 때,  
 EditTextView에 데이터가 모두 들어있으면 회원가입이 완료되었다는 메시지 표시  
 모두 들어있지 않으면 모든 칸에 내용을 입력하라는 메시지 표시  
@@ -92,7 +92,7 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 </code>
 </pre>
 
-
+---
 ## ✔2차 세미나 과제
 ### 📲구현 화면
 #### 필수 과제 & 성장 과제 1
