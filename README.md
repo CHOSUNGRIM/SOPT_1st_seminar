@@ -33,6 +33,8 @@ btn_SignUp.setOnClickListener {
 </pre>
 
 
+
+
 🟩startActivityForResult()  
 회원 가입에 성공했을 때, *SignUpActivity* 에서 입력 받은 아이디와 비밀번호를 로그인 화면에 입력해준다.  
 
