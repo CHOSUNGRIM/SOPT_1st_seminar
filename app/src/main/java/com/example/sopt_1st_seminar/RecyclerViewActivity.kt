@@ -27,7 +27,7 @@ class RecyclerViewActivity : AppCompatActivity() {
              SampleData("나이","22","작성 날짜 : 2020.10.17","항상 유익한 세미나 감사합니다"),
              SampleData("파트","안드로이드","작성 날짜 : 2020.10.17","아주 조금... 어렵지만"),
              SampleData("GitHub","https://github.com/CHOSUNGRIM","작성 날짜 : 2020.10.17","열심히 할게요"),
-             SampleData("SOPT","www.sopt.org","2020.10.17","작성 날짜 : 안드로이드 짱")
+             SampleData("SOPT","www.sopt.org","작성 날짜 : 2020.10.17","안드로이드 짱")
          )
     }
 }
