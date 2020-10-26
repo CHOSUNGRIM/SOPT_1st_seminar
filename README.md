@@ -10,7 +10,7 @@
 
 
 * ToastMessage  
-  - *SignUpActivity* 에서 회원가입 버튼을 눌렀을 때,  
+- *SignUpActivity* 에서 회원가입 버튼을 눌렀을 때,  
 EditTextView에 데이터가 모두 들어있으면 회원가입이 완료되었다는 메시지 표시  
 모두 들어있지 않으면 모든 칸에 내용을 입력하라는 메시지 표시  
 
