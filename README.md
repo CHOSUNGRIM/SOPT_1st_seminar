@@ -33,13 +33,12 @@ btn_SignUp.setOnClickListener {
 ##### 🟩 성장 과제1 ( startActivityForResult() )  
 회원 가입에 성공했을 때, *SignUpActivity* 에서 입력 받은 아이디와 비밀번호를 로그인 화면에 입력해준다.  
 
--request code로 *SignUpCode* 를 100이라 한다.
+1. request code로 *SignUpCode* 를 100이라 한다.
 ```Kotlin
 val SignUpCode = 100
 ```
 
-
--*loginActivity*에서 *SignUpActivity*를 **startAcrivityForResult**를 이용하여 불러낸다.  
+2. *loginActivity*에서 **startAcrivityForResult**를 통해 *SignUpActivity*를 불러낸다.  
 startActivityForResult는 불러낸 액티비티가 종료될 때 결과값을 가지고 돌아온다.
 ```Kotlin
 SignUp_btn.setOnClickListener {
@@ -49,7 +48,7 @@ SignUp_btn.setOnClickListener {
 ```
 
 
--불러낸 액티비티인 *SignUpActivity*에서 회원가입에 성공하면  
+3. 불러낸 액티비티인 *SignUpActivity*에서 회원가입에 성공하면  
 **putExtra**를 통해 EditTextView를 통해 받은 데이터를 intent에 넣어주고  
 **setResult**를 통해 *RESULT_OK* 와 데이터가 담긴 intent를 넣어준 후에
 **finish**를 통해 불러낸 액티비티를 종료하고 *LoginActivity*로 돌아간다.
@@ -62,8 +61,10 @@ finish()
 ```
 
 
--돌아온 *LoginActivity*에서 **onActivityResult**를 통해 requestCodedhk resultCode가 각각 *SignUpCode*와 *RESULT_OK*와 일치하면
-**getStringExtra**를 통해 변수에 데이터 값을 넣어주고, **setText**를 통해 EditTextView에 데이터를 넣어준다.
+4. 돌아온 *LoginActivity*에서  
+**onActivityResult**를 통해 requestCodedhk resultCode가 각각 *SignUpCode*와 *RESULT_OK*와 일치하면  
+**getStringExtra**를 통해 변수에 데이터 값을 넣어주고,  
+**setText**를 통해 EditTextView에 데이터를 넣어준다.
 ```Kotlin
 override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
