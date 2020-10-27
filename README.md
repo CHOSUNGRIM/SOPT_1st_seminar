@@ -154,8 +154,8 @@ class SampleAdapter (private val context : Context) : RecyclerView.Adapter<Sampl
 }
 ```
 
-5. RecyclerView 배치
--리스트가 보여질 RecyclerView 영역 설정
+5. RecyclerView 배치  
+-리스트가 보여질 RecyclerView 영역 설정  
 ```Kotlin
 <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_rcv"
@@ -163,17 +163,17 @@ class SampleAdapter (private val context : Context) : RecyclerView.Adapter<Sampl
         android:layout_height="match_parent" />
 ```
 
-6. 배치 방향 확인
--RecyclerView의 adapter를 *SampleAdapter*로 세팅
--배치 방향을 LinearLayoutManager로 설정 (세로 방향)
+6. 배치 방향 확인  
+-RecyclerView의 adapter를 *SampleAdapter*로 세팅  
+-배치 방향을 LinearLayoutManager로 설정 (세로 방향)  
 ```Kotlin
 main_rcv.adapter = sampleAdapter
 main_rcv.layoutManager = LinearLayoutManager(this)
 ```
 
-7. Adapter 갱신
--*sampleAdapter*에 데이터를 넣어주고
-**notifyDataSetChanged**를 이용해 데이터가 갱신된 것을 adapter에 알려준다.
+7. Adapter 갱신  
+-*sampleAdapter*에 데이터를 넣어주고  
+**notifyDataSetChanged**를 이용해 데이터가 갱신된 것을 adapter에 알려준다.  
 ```Kotlin
 sampleAdapter.data = mutableListOf(
              SampleData("이름","조성림","작성 날짜 : 2020.10.17","안녕하세요, 팟장님"),
@@ -186,7 +186,7 @@ sampleAdapter.data = mutableListOf(
 sampleAdapter.notifyDataSetChanged()
 ```
 
-##### 아이템을 클릭하면 아이템의 정보를 가지고 있는 상세화면으로 이동하기 위해
+##### 아이템을 클릭하면 아이템의 정보를 가지고 있는 상세화면으로 이동하기 위해  
 1. 위에서 오버라이드 해준 onBindViewHolder 함수에서 itemView를 클릭했을 때 data를 Intent에 넣어준다  
 -*model*이라는 변수를 선언하여 adapterdml data를 넣어주고, *gTitle, gSubtitle, gDate, gDescription* 변수에 각각 *model*에 있는 데이터를 넣어주었다.  
 - **val intent = Intent(context, DetailActivity::class.java)** 를 이용해 액티비티를 전환해주고, **putExtra**를 통해 intent로 데이터 값을 전달해준다.  
