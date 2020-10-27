@@ -11,8 +11,8 @@
 
 #### 🟩 필수 과제 ( setOnClickListener & ToastMessage & 화면 이동 )  
 *SignUpActivity* 에서 회원가입 버튼을 눌렀을 때,  
-EditTextView에 데이터가 모두 들어있으면 회원가입이 완료되었다는 메시지 표시  
-모두 들어있지 않으면 모든 칸에 내용을 입력하라는 메시지 표시  
+-EditTextView에 데이터가 모두 들어있으면 회원가입이 완료되었다는 메시지 표시  
+-모두 들어있지 않으면 모든 칸에 내용을 입력하라는 메시지 표시  
 ```Kotlin
 btn_SignUp.setOnClickListener {
             if (SignUp_name_edt.text.isNullOrBlank() || SignUp_id_edt.text.isNullOrBlank() || SignUp_pw_edt.text.isNullOrBlank()) {
