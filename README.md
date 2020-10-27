@@ -155,8 +155,76 @@ class SampleAdapter (private val context : Context) : RecyclerView.Adapter<Sampl
 ```
 
 5. RecyclerView 배치
+-리스트가 보여질 RecyclerView 영역 설정
+```Kotlin
+<androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_rcv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+```
+
 6. 배치 방향 확인
+-RecyclerView의 adapter를 *SampleAdapter*로 세팅
+-배치 방향을 LinearLayoutManager로 설정 (세로 방향)
+```Kotlin
+main_rcv.adapter = sampleAdapter
+main_rcv.layoutManager = LinearLayoutManager(this)
+```
+
 7. Adapter 갱신
+-*sampleAdapter*에 데이터를 넣어주고
+**notifyDataSetChanged**를 이용해 데이터가 갱신된 것을 adapter에 알려준다.
+```Kotlin
+sampleAdapter.data = mutableListOf(
+             SampleData("이름","조성림","작성 날짜 : 2020.10.17","안녕하세요, 팟장님"),
+             SampleData("나이","22","작성 날짜 : 2020.10.17","항상 유익한 세미나 감사합니다"),
+             SampleData("파트","안드로이드","작성 날짜 : 2020.10.17","아주 조금... 어렵지만"),
+             SampleData("GitHub","https://github.com/CHOSUNGRIM","작성 날짜 : 2020.10.17","열심히 할게요"),
+             SampleData("SOPT","www.sopt.org","작성 날짜 : 2020.10.17","안드로이드 짱")
+         )
+         
+sampleAdapter.notifyDataSetChanged()
+```
+
+##### 아이템을 클릭하면 아이템의 정보를 가지고 있는 상세화면으로 이동하기 위해
+1. 위에서 오버라이드 해준 onBindViewHolder 함수에서 itemView를 클릭했을 때 data를 Intent에 넣어준다  
+-*model*이라는 변수를 선언하여 adapterdml data를 넣어주고, *gTitle, gSubtitle, gDate, gDescription* 변수에 각각 *model*에 있는 데이터를 넣어주었다.  
+- **val intent = Intent(context, DetailActivity::class.java)** 를 이용해 액티비티를 전환해주고, **putExtra**를 통해 intent로 데이터 값을 전달해준다.  
+```Kotlin
+override fun onBindViewHolder(holder: SampleViewHolder, position: Int) {
+        holder.onBind(data[position])
+
+        holder.itemView.setOnClickListener {
+            val model = data.get(position)
+            var gTitle : String = model.title
+            var gSubtitle : String = model.subTitle
+            var gDate : String = model.date
+            var gDescription : String = model.description
+
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra("iTitle", gTitle)
+            intent.putExtra("iSubtitle", gSubtitle)
+            intent.putExtra("iDate", gDate)
+            intent.putExtra("iDescription", gDescription)
+
+            context.startActivity(intent)
+        }
+}
+```
+
+2. *DetailActivity.kt* 을 만들고 *aTitle, aSubtitle, aDate, aDescription* 이라는 변수를 선언한 후, **getStringExtra**를 이용해서 intent의 데이터 값을 넣어준다.  
+-이 값들을 *activity_detail.xml*의 TextView에 **setText**를 이용하여 넣어준다.  
+```Kotlin
+val aTitle = intent.getStringExtra("iTitle")
+val aSubtitle = intent.getStringExtra("iSubtitle")
+val aDate = intent.getStringExtra("iDate")
+val aDescription = intent.getStringExtra("iDescription")
+
+detail_title_txt.setText(aTitle)
+detail_subtitle_txt.setText(aSubtitle)
+detail_date_txt.setText(aDate)
+detail_description_txt.setText(aDescription)
+```
 
 #### 🟩 성장 과제1 ( GridLinearLayout )  
 아이템을 격자 형태로 보여준다.  
