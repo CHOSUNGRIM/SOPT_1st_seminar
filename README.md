@@ -11,8 +11,8 @@
 
 #### 🟩 필수 과제 ( setOnClickListener & ToastMessage & 화면 이동 )  
 *SignUpActivity* 에서 회원가입 버튼을 눌렀을 때,  
-EditTextView에 데이터가 모두 들어있으면 회원가입이 완료되었다는 메시지 표시  
-모두 들어있지 않으면 모든 칸에 내용을 입력하라는 메시지 표시  
+-EditTextView에 데이터가 모두 들어있으면 회원가입이 완료되었다는 메시지 표시  
+-모두 들어있지 않으면 모든 칸에 내용을 입력하라는 메시지 표시  
 ```Kotlin
 btn_SignUp.setOnClickListener {
             if (SignUp_name_edt.text.isNullOrBlank() || SignUp_id_edt.text.isNullOrBlank() || SignUp_pw_edt.text.isNullOrBlank()) {
@@ -33,13 +33,12 @@ btn_SignUp.setOnClickListener {
 ##### 🟩 성장 과제1 ( startActivityForResult() )  
 회원 가입에 성공했을 때, *SignUpActivity* 에서 입력 받은 아이디와 비밀번호를 로그인 화면에 입력해준다.  
 
--request code로 *SignUpCode* 를 100이라 한다.
+1. request code로 *SignUpCode* 를 100이라 한다.
 ```Kotlin
 val SignUpCode = 100
 ```
 
-
--*loginActivity*에서 *SignUpActivity*를 **startAcrivityForResult**를 이용하여 불러낸다.  
+2. *loginActivity*에서 **startAcrivityForResult**를 통해 *SignUpActivity*를 불러낸다.  
 startActivityForResult는 불러낸 액티비티가 종료될 때 결과값을 가지고 돌아온다.
 ```Kotlin
 SignUp_btn.setOnClickListener {
@@ -49,9 +48,9 @@ SignUp_btn.setOnClickListener {
 ```
 
 
--불러낸 액티비티인 *SignUpActivity*에서 회원가입에 성공하면  
+3. 불러낸 액티비티인 *SignUpActivity*에서 회원가입에 성공하면  
 **putExtra**를 통해 EditTextView를 통해 받은 데이터를 intent에 넣어주고  
-**setResult**를 통해 *RESULT_OK* 와 데이터가 담긴 intent를 넣어준 후에
+**setResult**를 통해 *RESULT_OK* 와 데이터가 담긴 intent를 넣어준 후에  
 **finish**를 통해 불러낸 액티비티를 종료하고 *LoginActivity*로 돌아간다.
 ```Kotlin
 val intent = Intent()
@@ -62,8 +61,10 @@ finish()
 ```
 
 
--돌아온 *LoginActivity*에서 **onActivityResult**를 통해 requestCodedhk resultCode가 각각 *SignUpCode*와 *RESULT_OK*와 일치하면
-**getStringExtra**를 통해 변수에 데이터 값을 넣어주고, **setText**를 통해 EditTextView에 데이터를 넣어준다.
+4. 돌아온 *LoginActivity*에서  
+**onActivityResult**를 통해 requestCode resultCode가 각각 *SignUpCode*와 *RESULT_OK*와 일치하면  
+**getStringExtra**를 통해 변수에 데이터 값을 넣어주고,  
+**setText**를 통해 EditTextView에 데이터를 넣어준다.
 ```Kotlin
 override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -93,10 +94,12 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 ItemAnimator를 이용한 애니메이션
 
 1. 아이템 xml 작성  
--*profile_item_list.xml*을 만들었다.
+-*profile_item_list.xml*을 만들었다.  
+반복적으로 보여질 list item 의 모양을 만들어준다.  
 
 2. 아이템에 대한 데이터 객체 만들기  
--*SampleDate.kt*을 만들었다.
+-*SampleDate.kt*을 만들었다.  
+정보를 담을 변수를 선언해준다.  
 ```Kotlin
 data class SampleData(
     val title : String,
@@ -104,9 +107,14 @@ data class SampleData(
     val date : String,
     val description : String
 ```
+
 3. ViewHolder 만들기  
--데이터를 뷰에 뿌려주는 역할  
--*SampleViewHolder.kt*을 만들었다.
+-Adapter에서 전달받은 데이터를 layout에 Bind 시켜준다.  
+즉, itemLayout에 데이터를 넣어준다  
+-*SampleViewHolder.kt*을 만들었다.  
+**ProfileViewHolder** 클래스는 RecyclerView.ViewHolder을 상속 받고,  
+**findViewById**를 통해 *profile_item_list.xml* 에서 정의한 View/ViewGroup을 요소로 가진다.  
+**onBind** 함수는 실질적으로 데이터를 넣어주는 함수로 Adapter에서 호출할 예정이다.
 ```Kotlin
 class SampleViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView){
     private val title : TextView = itemView.findViewById(R.id.item_title)
@@ -118,11 +126,118 @@ class SampleViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView){
     }
 }
 ```
-4. Adapter 만들기
--데이터를 각 아이템들에게 전달하는 역할
-5. RecyclerView 배치
-6. 배치 방향 확인
-7. Adapter 갱신
+
+4. Adapter 만들기  
+-데이터를 각 아이템들에게 전달하는 역할  
+-*SampleAdapter*라는 Adapter를 만들었다.  
+RecyclerViewAdapter는 **context** 객체가 필요하므로 선언과 동시에 초기화 해준다.  
+RecyclerView.Adapter를 상속 받으면서 <> 안에 해당 Adapter가 데이터를 전달할 ViewHolder를 작성한다. 여기서는 *SampleViewHolder*로 데이터를 전달한다.  
+Adapter는 data를 가지고 있고 **onCreateViewHolder, getItemCount, onBindViewHolder**를 반드시 오버라이드 해줘야 한다.  
+-**onCreateViewHolder** : 각 Item 마다 layout을 inflate 시키고 ViewHolder를 생성  
+-**getItemCount** : RecyclerView로 보여줄 데이터의 전체 길이를 리턴  
+-**onBindViewHolder** : ViewHolder의 onBind 함수를 호출하여 ViewHolder로 데이터를 전달    
+```Kotlin
+class SampleAdapter (private val context : Context) : RecyclerView.Adapter<SampleViewHolder>(){
+    var data = listOf<SampleData>()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SampleViewHolder {
+        val view = LayoutInflater.from(context).inflate(R.layout.profile_item_list, parent, false)
+
+        return SampleViewHolder(view)
+    }
+
+    override fun getItemCount(): Int = data.size
+
+    override fun onBindViewHolder(holder: SampleViewHolder, position: Int) {
+        holder.onBind(data[position])
+    }
+}
+```
+
+5. RecyclerView 배치  
+-리스트가 보여질 RecyclerView 영역 설정  
+```Kotlin
+<androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_rcv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+```
+
+6. 실제 적용  
+-*SampleAdapter*를 lateinit으로 선언  
+-adapter에 context 객체를 파라미터로 전달  
+-RecyclerView의 adapter를 *SampleAdapter*로 세팅  
+-배치 방향을 LinearLayoutManager로 설정 (세로 방향)  
+```Kotlin
+class RecyclerViewActivity : AppCompatActivity() {
+    private lateinit var sampleAdapter: SampleAdapter
+
+     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_recycler_view)
+
+         sampleAdapter = SampleAdapter(this)
+
+         main_rcv.adapter = sampleAdapter
+         main_rcv.layoutManager = LinearLayoutManager(this)
+     }
+}
+```
+
+7. Adapter 갱신  
+-*sampleAdapter*에 데이터를 넣어주고  
+**notifyDataSetChanged**를 이용해 데이터가 갱신된 것을 adapter에 알려준다.  
+```Kotlin
+sampleAdapter.data = mutableListOf(
+             SampleData("이름","조성림","작성 날짜 : 2020.10.17","안녕하세요, 팟장님"),
+             SampleData("나이","22","작성 날짜 : 2020.10.17","항상 유익한 세미나 감사합니다"),
+             SampleData("파트","안드로이드","작성 날짜 : 2020.10.17","아주 조금... 어렵지만"),
+             SampleData("GitHub","https://github.com/CHOSUNGRIM","작성 날짜 : 2020.10.17","열심히 할게요"),
+             SampleData("SOPT","www.sopt.org","작성 날짜 : 2020.10.17","안드로이드 짱")
+         )
+         
+sampleAdapter.notifyDataSetChanged()
+```
+
+##### 아이템을 클릭하면 아이템의 정보를 가지고 있는 상세화면으로 이동하기 위해  
+1. 위에서 오버라이드 해준 onBindViewHolder 함수에서 itemView를 클릭했을 때 data를 Intent에 넣어준다  
+-*model*이라는 변수를 선언하여 adapterdml data를 넣어주고, *gTitle, gSubtitle, gDate, gDescription* 변수에 각각 *model*에 있는 데이터를 넣어주었다.  
+- **val intent = Intent(context, DetailActivity::class.java)** 를 이용해 액티비티를 전환해주고, **putExtra**를 통해 intent로 데이터 값을 전달해준다.  
+```Kotlin
+override fun onBindViewHolder(holder: SampleViewHolder, position: Int) {
+        holder.onBind(data[position])
+
+        holder.itemView.setOnClickListener {
+            val model = data.get(position)
+            var gTitle : String = model.title
+            var gSubtitle : String = model.subTitle
+            var gDate : String = model.date
+            var gDescription : String = model.description
+
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra("iTitle", gTitle)
+            intent.putExtra("iSubtitle", gSubtitle)
+            intent.putExtra("iDate", gDate)
+            intent.putExtra("iDescription", gDescription)
+
+            context.startActivity(intent)
+        }
+}
+```
+
+2. *DetailActivity.kt* 을 만들고 *aTitle, aSubtitle, aDate, aDescription* 이라는 변수를 선언한 후, **getStringExtra**를 이용해서 intent의 데이터 값을 넣어준다.  
+-이 값들을 *activity_detail.xml*의 TextView에 **setText**를 이용하여 넣어준다.  
+```Kotlin
+val aTitle = intent.getStringExtra("iTitle")
+val aSubtitle = intent.getStringExtra("iSubtitle")
+val aDate = intent.getStringExtra("iDate")
+val aDescription = intent.getStringExtra("iDescription")
+
+detail_title_txt.setText(aTitle)
+detail_subtitle_txt.setText(aSubtitle)
+detail_date_txt.setText(aDate)
+detail_description_txt.setText(aDescription)
+```
 
 #### 🟩 성장 과제1 ( GridLinearLayout )  
 아이템을 격자 형태로 보여준다.  
