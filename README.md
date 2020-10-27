@@ -94,10 +94,12 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
 ItemAnimator를 이용한 애니메이션
 
 1. 아이템 xml 작성  
--*profile_item_list.xml*을 만들었다.
+-*profile_item_list.xml*을 만들었다.  
+반복적으로 보여질 list item 의 모양을 만들어준다.  
 
 2. 아이템에 대한 데이터 객체 만들기  
--*SampleDate.kt*을 만들었다.
+-*SampleDate.kt*을 만들었다.  
+정보를 담을 변수를 선언해준다.  
 ```Kotlin
 data class SampleData(
     val title : String,
@@ -105,9 +107,13 @@ data class SampleData(
     val date : String,
     val description : String
 ```
+
 3. ViewHolder 만들기  
--데이터를 뷰에 뿌려주는 역할  
--*SampleViewHolder.kt*을 만들었다.
+-Adapter에서 전달받은 데이터를 layout에 Bind 시켜준다.  
+즉, itemLayout에 데이터를 넣어준다  
+-*SampleViewHolder.kt*을 만들었다.  
+**ProfileViewHolder** 클래스는 RecyclerView.ViewHolder을 상속 반고, **findViewById**를 통해 *profile_item_list.xml* 에서 정의한 View/ViewGroup을 요소로 가진다.  
+**onBind** 함수는 실질적으로 데이터를 넣어주는 함수로 Adapter에서 호출할 예정이다.
 ```Kotlin
 class SampleViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView){
     private val title : TextView = itemView.findViewById(R.id.item_title)
@@ -119,8 +125,34 @@ class SampleViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView){
     }
 }
 ```
-4. Adapter 만들기
--데이터를 각 아이템들에게 전달하는 역할
+
+4. Adapter 만들기  
+-데이터를 각 아이템들에게 전달하는 역할  
+-*SampleAdapter*라는 Adapter를 만들었다.  
+RecyclerViewAdapter는 **context** 객체가 필요하므로 선언과 동시에 초기화 해준다.  
+RecyclerView.Adapter를 상속 받으면서 <> 안에 해당 Adapter가 데이터를 전달할 ViewHolder를 작성한다. 여기서는 *SampleViewHolder*로 데이터를 전달한다.  
+Adapter는 data를 가지고 있고 **onCreateViewHolder, getItemCount, onBindViewHolder**를 반드시 오버라이드 해줘야 한다.  
+-**onCreateViewHolder** : 각 Item 마다 layout을 inflate 시키고 ViewHolder를 생성  
+-**getItemCount** : RecyclerView로 보여줄 데이터의 전체 길이를 리턴  
+-**onBindViewHolder** : ViewHolder의 onBind 함수를 호출하여 ViewHolder로 데이터를 전달    
+```Kotlin
+class SampleAdapter (private val context : Context) : RecyclerView.Adapter<SampleViewHolder>(){
+    var data = listOf<SampleData>()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SampleViewHolder {
+        val view = LayoutInflater.from(context).inflate(R.layout.profile_item_list, parent, false)
+
+        return SampleViewHolder(view)
+    }
+
+    override fun getItemCount(): Int = data.size
+
+    override fun onBindViewHolder(holder: SampleViewHolder, position: Int) {
+        holder.onBind(data[position])
+    }
+}
+```
+
 5. RecyclerView 배치
 6. 배치 방향 확인
 7. Adapter 갱신
