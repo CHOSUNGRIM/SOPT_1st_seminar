@@ -163,12 +163,25 @@ class SampleAdapter (private val context : Context) : RecyclerView.Adapter<Sampl
         android:layout_height="match_parent" />
 ```
 
-6. 배치 방향 확인  
+6. 실제 적용  
+-*SampleAdapter*를 lateinit으로 선언  
+-adapter에 context 객체를 파라미터로 전달  
 -RecyclerView의 adapter를 *SampleAdapter*로 세팅  
 -배치 방향을 LinearLayoutManager로 설정 (세로 방향)  
 ```Kotlin
-main_rcv.adapter = sampleAdapter
-main_rcv.layoutManager = LinearLayoutManager(this)
+class RecyclerViewActivity : AppCompatActivity() {
+    private lateinit var sampleAdapter: SampleAdapter
+
+     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_recycler_view)
+
+         sampleAdapter = SampleAdapter(this)
+
+         main_rcv.adapter = sampleAdapter
+         main_rcv.layoutManager = LinearLayoutManager(this)
+     }
+}
 ```
 
 7. Adapter 갱신  
