@@ -37,7 +37,5 @@ class SampleAdapter (private val context : Context) : RecyclerView.Adapter<Sampl
 
             context.startActivity(intent)
         }
-
-
     }
 }

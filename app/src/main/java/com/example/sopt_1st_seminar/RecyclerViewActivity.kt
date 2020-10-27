@@ -29,5 +29,8 @@ class RecyclerViewActivity : AppCompatActivity() {
              SampleData("GitHub","https://github.com/CHOSUNGRIM","작성 날짜 : 2020.10.17","열심히 할게요"),
              SampleData("SOPT","www.sopt.org","작성 날짜 : 2020.10.17","안드로이드 짱")
          )
+
+         sampleAdapter.notifyDataSetChanged()
+
     }
 }
