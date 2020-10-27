@@ -112,7 +112,8 @@ data class SampleData(
 -Adapter에서 전달받은 데이터를 layout에 Bind 시켜준다.  
 즉, itemLayout에 데이터를 넣어준다  
 -*SampleViewHolder.kt*을 만들었다.  
-**ProfileViewHolder** 클래스는 RecyclerView.ViewHolder을 상속 반고, **findViewById**를 통해 *profile_item_list.xml* 에서 정의한 View/ViewGroup을 요소로 가진다.  
+**ProfileViewHolder** 클래스는 RecyclerView.ViewHolder을 상속 받고,  
+**findViewById**를 통해 *profile_item_list.xml* 에서 정의한 View/ViewGroup을 요소로 가진다.  
 **onBind** 함수는 실질적으로 데이터를 넣어주는 함수로 Adapter에서 호출할 예정이다.
 ```Kotlin
 class SampleViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView){
