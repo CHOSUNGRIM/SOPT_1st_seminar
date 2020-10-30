@@ -17,17 +17,19 @@ class LoginActivity : AppCompatActivity() {
 
         loadData()
 
-        if (login_id_edt.text.isNullOrBlank() || login_pw_edt.text.isNullOrBlank()){
-            SignUp_btn.setOnClickListener {
-                val intent = Intent(this, SignUpActivity::class.java)
-                startActivityForResult(intent, SignUpCode)
-            }
+        SignUp_btn.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivityForResult(intent, SignUpCode)
+        }
 
-            Login_btn.setOnClickListener {
-                val intent = Intent(this, RecyclerViewActivity::class.java)
-                startActivity(intent)
-            }
-        } else {
+        Login_btn.setOnClickListener {
+            saveData()
+
+            val intent = Intent(this, RecyclerViewActivity::class.java)
+            startActivity(intent)
+        }
+
+        if (!(login_id_edt.text.isNullOrBlank() || login_pw_edt.text.isNullOrBlank())){
             Toast.makeText(this, "자동로그인 되었습니다.", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, RecyclerViewActivity::class.java)
             startActivity(intent)
@@ -55,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
         login_pw_edt.setText(pref.getString("savePw",""))
     }
 
-    fun saveData() {
+    private fun saveData() {
         val pref = getSharedPreferences("pref",0)
         val edit = pref.edit()
         edit.putString("saveId", login_id_edt.text.toString())
