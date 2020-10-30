@@ -11,9 +11,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        sopt_btn.setOnClickListener {
-            val intent = Intent (this, LoginActivity::class.java)
-            startActivity(intent)
-        }
     }
 }
