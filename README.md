@@ -30,7 +30,7 @@ btn_SignUp.setOnClickListener {
 
 
 
-##### 🟩 성장 과제1 ( startActivityForResult() )  - 2020.10.25 완료  
+#### 🟩 성장 과제1 ( startActivityForResult() )  - 2020.10.25 완료  
 회원 가입에 성공했을 때, *SignUpActivity* 에서 입력 받은 아이디와 비밀번호를 로그인 화면에 입력해준다.  
 
 1. request code로 *SignUpCode* 를 100이라 한다.
