@@ -25,13 +25,13 @@ class LoginActivity : AppCompatActivity() {
         Login_btn.setOnClickListener {
             saveData()
 
-            val intent = Intent(this, RecyclerViewActivity::class.java)
+            val intent = Intent(this, ViewPagerActivity::class.java)
             startActivity(intent)
         }
 
         if (!(login_id_edt.text.isNullOrBlank() || login_pw_edt.text.isNullOrBlank())){
             Toast.makeText(this, "자동로그인 되었습니다.", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, RecyclerViewActivity::class.java)
+            val intent = Intent(this, ViewPagerActivity::class.java)
             startActivity(intent)
             finish()
         }

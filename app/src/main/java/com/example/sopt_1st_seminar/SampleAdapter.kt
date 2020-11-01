@@ -5,10 +5,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.profile_item_list.view.*
-import java.security.AccessControlContext
 
-class SampleAdapter (private val context : Context) : RecyclerView.Adapter<SampleViewHolder>(){
+class SampleAdapter(private val context: Context?) : RecyclerView.Adapter<SampleViewHolder>(){
     var data = listOf<SampleData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SampleViewHolder {
@@ -35,7 +33,7 @@ class SampleAdapter (private val context : Context) : RecyclerView.Adapter<Sampl
             intent.putExtra("iDate", gDate)
             intent.putExtra("iDescription", gDescription)
 
-            context.startActivity(intent)
+            context?.startActivity(intent)
         }
     }
 }
