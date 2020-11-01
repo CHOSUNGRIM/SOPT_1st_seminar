@@ -5,8 +5,8 @@
 ---
 ## 🤍1차 세미나 과제🤍
 ### 📲 구현 화면
-#### 필수 과제 & 성장 과제 1 
-<img src="https://user-images.githubusercontent.com/72273531/97198951-c9cb4b00-17f2-11eb-94ee-b6b63882e95e.gif" width="230" height="500">
+#### 필수 과제 & 성장 과제 1 & 성장 과제 2
+<img src="https://user-images.githubusercontent.com/72273531/97657964-8d2b7800-1aae-11eb-8927-66d0e42eb47a.gif" width="230" height="500">
 
 
 #### 🟩 필수 과제 ( setOnClickListener & ToastMessage & 화면 이동 ) - 2020.10.18 완료  
@@ -78,7 +78,51 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) 
         }
 }
 ```
+
+
+#### 🟩 성장 과제2 ( 자동 로그인 )  - 2020.10.30 완료  
+회원 가입 시 작성한 아이디와 로그인을 저장했다가 다음 로그인 때 자동로그인이 되게 한다.  
+
+1. 아이디와 로그인을 저장하는 함수인 saveData() 와 저장한 데이터를 불러오는 loadData() 라는 함수를 만든다.  
+```Kotlin
+private fun loadData() {
+    val pref = getSharedPreferences("pref",0)
+    login_id_edt.setText(pref.getString("saveId",""))
+    login_pw_edt.setText(pref.getString("savePw",""))
+}
+
+private fun saveData() {
+    val pref = getSharedPreferences("pref",0)
+    val edit = pref.edit()
+    edit.putString("saveId", login_id_edt.text.toString())
+    edit.putString("savePw", login_pw_edt.text.toString())
+    edit.apply()
+}
+```
+
+2. *LoginActivity*의 *Login_btn*을 눌렀을 때, saveData()를 호출해서 데이터를 저장하고 다음 액티비티로 넘어가게 한다.  
+```Kotlin
+Login_btn.setOnClickListener {
+    saveData()
+
+    val intent = Intent(this, RecyclerViewActivity::class.java)
+    startActivity(intent)
+}
+```
+
+3. *LoginActivity*가 실행될 때, 아이디와 비밀번호 EditTextView에 값이 저장되어 있으면 자동 로그인이 되고 다음 액티비티로 넘어가게 한다.  
+```Kotlin
+if (!(login_id_edt.text.isNullOrBlank() || login_pw_edt.text.isNullOrBlank())){
+    Toast.makeText(this, "자동로그인 되었습니다.", Toast.LENGTH_SHORT).show()
+    val intent = Intent(this, RecyclerViewActivity::class.java)
+    startActivity(intent)
+    finish()
+}
+```
+
 [🔝](https://github.com/CHOSUNGRIM/SOPT_1st_seminar#sopt_27th_android)
+
+
 
 ---
 ## 🤍2차 세미나 과제🤍
