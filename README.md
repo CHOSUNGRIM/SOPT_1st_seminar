@@ -302,13 +302,13 @@ main_rcv.layoutManager = GridLayoutManager(this,3,RecyclerView.VERTICAL,false)
 
 #### 🟩 필수 과제 ( Fragment & ViewPager & BottomNavigation & TabLayout ) - 2020.11.04 완료  
 * **Fragment**  
-- 하나의 액티비티가 여러 개의 화면을 가지도록 함    
-- 다른 액티비티에서도 사용 가능  
-- 액티비티가 관리  
+-하나의 액티비티가 여러 개의 화면을 가지도록 함    
+-다른 액티비티에서도 사용 가능  
+-액티비티가 관리  
 
 * **ViewPager**  
-- 하나의 화면 안에서 여러가지 화면(프래그먼트로 만들어주면 됨)을 슬라이드 형식으로 보여줄 때 사용  
-- 하단 탭, 상단 탭과 연동하여 사용  
+-하나의 화면 안에서 여러가지 화면(프래그먼트로 만들어주면 됨)을 슬라이드 형식으로 보여줄 때 사용  
+-하단 탭, 상단 탭과 연동하여 사용  
 1. *ViewPagerActivity*를 만들고 해당 xml 파일에서 ViewPager가 보여질 영역을 설정해준다.  
 2. ViewPager의 Adapter를 만들어준다.  
 - ViewPager의 Adapter는 **FragmentManager**를 필요로 하고 **FragmentStatePagerAdapter**를 상속받는다. 그리고 **getItem**과 **getCount** 메소드를 오버라이드 해줘야 한다.  
@@ -347,10 +347,75 @@ class ViewPagerActivity : AppCompatActivity() {
 }
 ```
 
-**BottomNavigation**  
-- ViewPager와 연동하여 서브 화면들을 전환  
-- 화면이 3개 이상일 때 사용하는 것을 권장  
+* **BottomNavigation**  
+-ViewPager와 연동하여 서브 화면들을 전환  
+-화면이 3개 이상일 때 사용하는 것을 권장  
 1. 하단 탭에 사용할 아이콘을 **Vector Asset**을 통해 만든다. 
+2. *menu* 이름으로 Directory를 생성하고 xml에서 item태그를 생성한다.  
+3. 하단 탭을 사용할 액티비티의 xml파일에서 BottomNavigation이 사용될 영역을 설정하고 앞에서 만든 menu 파일을 적용해준다.  
+```Kotlin
+app:menu="@menu/bottom_menu"
+```
+4. *ViewPagerActivity*에서 각 탭을 클릭했을 때의 이벤트 처리 리스너를 설정해준다. **setOnNavigationItemSelectedListener**  
+*menu.xml*의 item의 id를 통해 뷰페이저의 currentItem을 조작한다.  
+``Kotlin
+sample_bottom_navi.setOnNavigationItemSelectedListener {
+   var index by Delegates.notNull<Int>()
+
+   when(it.itemId){
+       R.id.menu_account -> index = 0
+       R.id.menu_comment -> index = 1
+       R.id.menu_cloud -> index = 2
+    }
+    sample_bottom_viewpager.currentItem = index
+    true
+            }
+```
+
+5. 슬라이드 하고 나서도 하단 탭이 변경되도록 하기 위해 페이지 변경에 관한 리스너를 설정해준다. 
+```Kotlin
+sample_bottom_viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+    override fun onPageScrollStateChanged(state: Int) {}
+    override fun onPageScrolled(
+        position: Int,
+        positionOffset: Float,
+        positionOffsetPixels: Int
+     ) {}
+
+     override fun onPageSelected(position: Int) {
+         sample_bottom_navi.menu.getItem(position).isChecked = true
+     }
+})
+```
+
+* **ViewPager의 *FirstFragment*에 TabLayout을 이용하여 프로필 화면 만들기**
+1. 프로필 화면에 사용될 TabLayout에 연동할 *ProfileViewPagerActivity*와 *ProfileViewPagerAdapter*를 만들어준다.  
+2. *fragment_first.xml*에 TabLayout과 ProfileViewPager영역을 설정해준다.  
+3. *FirstFragment.kt*의 **onViewCreated**에서 **childFragmentManager**를 이용하여 *ProfileViewPagerAdapter*를 선언한다. Adapter에 프래그먼트를 넣어주고 ProfileViewPager에 Adapter를 적용해준다.  
+```Kotlin
+override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewpagerAdapter = ProfileViewPagerAdapter(childFragmentManager)
+        viewpagerAdapter.fragments = listOf(
+            ProfileFirstFragment(),
+            ProfileSecondFragment()
+        )
+
+        profile_tab_viewpager.adapter = viewpagerAdapter
+}
+```
+4. *FirstFragment.kt*의 **onViewCreated**에서 **setupWithViewPager**를 이용하여 탭레이아웃에 뷰페이저를 연동해준 후에, **getTabAt**을 이용하여 인덱스와 일치하는 탭 아이템 title을 작성해준다.  
+```Kotlin
+profile_tab.setupWithViewPager(profile_tab_viewpager)
+        profile_tab.apply {
+            getTabAt(0)?.text = "INFO"
+            getTabAt(1)?.text = "OTHER"
+        }
+```
+* **Fragment에 RecyclerView 넣기**
+1. 
+
 
 
 
