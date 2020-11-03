@@ -358,7 +358,7 @@ app:menu="@menu/bottom_menu"
 ```
 4. *ViewPagerActivity*에서 각 탭을 클릭했을 때의 이벤트 처리 리스너를 설정해준다. **setOnNavigationItemSelectedListener**  
 *menu.xml*의 item의 id를 통해 뷰페이저의 currentItem을 조작한다.  
-``Kotlin
+```Kotlin
 sample_bottom_navi.setOnNavigationItemSelectedListener {
    var index by Delegates.notNull<Int>()
 
@@ -414,7 +414,8 @@ profile_tab.setupWithViewPager(profile_tab_viewpager)
         }
 ```
 * **Fragment에 RecyclerView 넣기**
-1. 
+1. *fragment_second.xml*에서 RecyclerView가 보여질 영역을 설정해준다.  
+2. *SecondFragment.kt*에서 
 
 
 
