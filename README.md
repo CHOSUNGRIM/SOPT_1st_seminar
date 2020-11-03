@@ -311,7 +311,7 @@ main_rcv.layoutManager = GridLayoutManager(this,3,RecyclerView.VERTICAL,false)
 -하단 탭, 상단 탭과 연동하여 사용  
 1. *ViewPagerActivity*를 만들고 해당 xml 파일에서 ViewPager가 보여질 영역을 설정해준다.  
 2. ViewPager의 Adapter를 만들어준다.  
-- ViewPager의 Adapter는 **FragmentManager**를 필요로 하고 **FragmentStatePagerAdapter**를 상속받는다. 그리고 **getItem**과 **getCount** 메소드를 오버라이드 해줘야 한다.  
+-ViewPager의 Adapter는 **FragmentManager**를 필요로 하고 **FragmentStatePagerAdapter**를 상속받는다. 그리고 **getItem**과 **getCount** 메소드를 오버라이드 해줘야 한다.  
 ```Kotlin
 class ViewPagerAdapter (fm : FragmentManager)
     : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
