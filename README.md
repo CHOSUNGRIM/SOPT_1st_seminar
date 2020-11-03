@@ -413,10 +413,35 @@ profile_tab.setupWithViewPager(profile_tab_viewpager)
             getTabAt(1)?.text = "OTHER"
         }
 ```
-* **Fragment에 RecyclerView 넣기**
+* **ViewPager의 *SecondFragment*에 RecyclerView 넣기**
 1. *fragment_second.xml*에서 RecyclerView가 보여질 영역을 설정해준다.  
-2. *SecondFragment.kt*에서 
+2. *SecondFragment.kt*에서 **initView**함수를 호출하여 RecyclerView와 RecyclerViewAdapter를 적용해준다.  
+```Kotlin
+fun initView(view:View){
+    sampleAdapter = SampleAdapter(view.context)
+    recyclerView = view.findViewById(R.id.main_rcv)
+    main_rcv.layoutManager = LinearLayoutManager(context)
+    main_rcv.adapter = sampleAdapter
 
+    sampleAdapter.data = mutableListOf(
+        SampleData("이름","조성림","작성 날짜 : 2020.10.17","안녕하세요, 팟장님"),
+        SampleData("나이","22","작성 날짜 : 2020.10.17","항상 유익한 세미나 감사합니다"),
+        SampleData("파트","안드로이드","작성 날짜 : 2020.10.17","아주 조금... 어렵지만"),
+        SampleData("GitHub","https://github.com/CHOSUNGRIM","작성 날짜 : 2020.10.17","열심히 할게요"),
+        SampleData("SOPT","www.sopt.org","작성 날짜 : 2020.10.17","안드로이드 짱")
+    )
+
+    sampleAdapter.notifyDataSetChanged()
+}
+```
+3. **onViewCreated**에서 initview 함수를 실행해준다.  
+```Kotlin
+override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+
+    initView(view)
+}
+```
 
 
 
