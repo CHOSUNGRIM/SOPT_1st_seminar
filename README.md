@@ -1,7 +1,7 @@
 # 💚SOPT_27th_Android💚
 * [1차 세미나 과제](https://github.com/CHOSUNGRIM/SOPT_1st_seminar/blob/master/README.md#1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B3%BC%EC%A0%9C)
 * [2차 세미나 과제](https://github.com/CHOSUNGRIM/SOPT_1st_seminar#2%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B3%BC%EC%A0%9C)
-* [3차 세미나 과제]
+* [3차 세미나 과제](https://github.com/CHOSUNGRIM/SOPT_1st_seminar/blob/master/README.md#3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B3%BC%EC%A0%9C)
 
 ---
 ## 🤍1차 세미나 과제🤍
@@ -300,9 +300,57 @@ main_rcv.layoutManager = GridLayoutManager(this,3,RecyclerView.VERTICAL,false)
 #### 필수 과제
 <img src="https://user-images.githubusercontent.com/72273531/98011336-0e7e6400-1e3b-11eb-85b0-a3f9d3f3686f.gif" width="230" height="500">
 
-#### 🟩 필수 과제 ( Fragment & ViewPager & TabLayout) - 2020.11.04 완료  
+#### 🟩 필수 과제 ( Fragment & ViewPager & BottomNavigation & TabLayout ) - 2020.11.04 완료  
+* **Fragment**  
+- 하나의 액티비티가 여러 개의 화면을 가지도록 함    
+- 다른 액티비티에서도 사용 가능  
+- 액티비티가 관리  
 
+* **ViewPager**  
+- 하나의 화면 안에서 여러가지 화면(프래그먼트로 만들어주면 됨)을 슬라이드 형식으로 보여줄 때 사용  
+- 하단 탭, 상단 탭과 연동하여 사용  
+1. *ViewPagerActivity*를 만들고 해당 xml 파일에서 ViewPager가 보여질 영역을 설정해준다.  
+2. ViewPager의 Adapter를 만들어준다.  
+- ViewPager의 Adapter는 **FragmentManager**를 필요로 하고 **FragmentStatePagerAdapter**를 상속받는다. 그리고 **getItem**과 **getCount** 메소드를 오버라이드 해줘야 한다.  
+```Kotlin
+class ViewPagerAdapter (fm : FragmentManager)
+    : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
+    var fragments = listOf<Fragment>()
 
+    override fun getItem(position: Int): Fragment = when(position){
+        0 -> FirstFragment()
+        1 -> SecondFragment()
+        2 -> ThirdFragment()
+        else -> throw IllegalStateException("Unexpected position $position")
+    }
+
+    override fun getCount(): Int = fragments.size
+}
+```
+3. *ViewPagerActivity* 에서 *ViewPagerAdapter*를 선언하고 **supportFragment**로 프래그먼트 매니저를 불러온 후, Adapter의 fragments 변수에 프래그먼트를 생성해서 넣어준다. 그리고 선언한  Adapter를 장착해준다.  
+```Kotlin
+class ViewPagerActivity : AppCompatActivity() {
+    private lateinit var viewpagerAdapter : ViewPagerAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_view_pager)
+
+        viewpagerAdapter = ViewPagerAdapter(supportFragmentManager)
+        viewpagerAdapter.fragments = listOf(
+            FirstFragment(),
+            SecondFragment(),
+            ThirdFragment()
+        )
+
+        sample_bottom_viewpager.adapter = viewpagerAdapter
+}
+```
+
+**BottomNavigation**  
+- ViewPager와 연동하여 서브 화면들을 전환  
+- 화면이 3개 이상일 때 사용하는 것을 권장  
+1. 하단 탭에 사용할 아이콘을 **Vector Asset**을 통해 만든다. 
 
 
 
