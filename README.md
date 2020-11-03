@@ -1,6 +1,7 @@
 # 💚SOPT_27th_Android💚
 * [1차 세미나 과제](https://github.com/CHOSUNGRIM/SOPT_1st_seminar/blob/master/README.md#1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B3%BC%EC%A0%9C)
 * [2차 세미나 과제](https://github.com/CHOSUNGRIM/SOPT_1st_seminar#2%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B3%BC%EC%A0%9C)
+* [3차 세미나 과제]
 
 ---
 ## 🤍1차 세미나 과제🤍
@@ -289,4 +290,20 @@ GridLayoutManager(this, 가로줄 하나에 들어갈 아이템 수, RecyclerVie
 ```Kotlin
 main_rcv.layoutManager = GridLayoutManager(this,3,RecyclerView.VERTICAL,false)
 ```
+[🔝](https://github.com/CHOSUNGRIM/SOPT_1st_seminar#sopt_27th_android)
+
+
+
+---
+## 🤍3차 세미나 과제🤍
+### 📲 구현 화면
+#### 필수 과제
+<img src="https://user-images.githubusercontent.com/72273531/98011336-0e7e6400-1e3b-11eb-85b0-a3f9d3f3686f.gif" width="230" height="500">
+
+#### 🟩 필수 과제 ( Fragment & ViewPager & TabLayout) - 2020.11.04 완료  
+
+
+
+
+
 [🔝](https://github.com/CHOSUNGRIM/SOPT_1st_seminar#sopt_27th_android)
