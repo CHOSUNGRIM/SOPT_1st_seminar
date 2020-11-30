@@ -6,7 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_main.*
+import okhttp3.ResponseBody
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     val SignUpCode = 100
@@ -15,28 +19,55 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        Login_btn.setOnClickListener {
+            val email = login_id_edt.text.toString()
+            val password = login_pw_edt.text.toString()
+            val call : Call<LoginResponseData> = SoptServiceImpl.service.postLogin(
+                LoginRequestData(email = email, password = password)
+            )
+
+            call.enqueue(object : Callback<LoginResponseData> {
+                override fun onFailure(call: Call<LoginResponseData>, t: Throwable) {
+                    // 통신 실패 로직
+                }
+
+                override fun onResponse(
+                    call: Call<LoginResponseData>,
+                    response: Response<LoginResponseData>
+                ) {
+                    response.takeIf { it.isSuccessful }
+                        ?.body()
+                        ?.let { it ->
+                            saveData()
+
+                            val intent = Intent(this@LoginActivity, ViewPagerActivity::class.java)
+                            startActivity(intent)
+
+                            if (!(login_id_edt.text.isNullOrBlank() || login_pw_edt.text.isNullOrBlank())){
+                                Toast.makeText(this@LoginActivity, "반갑습니다.", Toast.LENGTH_SHORT).show()
+                                val intent = Intent(this@LoginActivity, ViewPagerActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+
+                            loadData()
+                        } ?: showError(response.errorBody())
+                }
+
+                private fun showError(error: ResponseBody?) {
+                    val e = error ?: return
+                    val ob = JSONObject(e.string())
+                    Toast.makeText(this@LoginActivity, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+
         loadData()
 
         SignUp_btn.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivityForResult(intent, SignUpCode)
         }
-
-        Login_btn.setOnClickListener {
-            saveData()
-
-            val intent = Intent(this, ViewPagerActivity::class.java)
-            startActivity(intent)
-        }
-
-        if (!(login_id_edt.text.isNullOrBlank() || login_pw_edt.text.isNullOrBlank())){
-            Toast.makeText(this, "자동로그인 되었습니다.", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, ViewPagerActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

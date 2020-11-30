@@ -14,7 +14,6 @@ class SecondFragment : Fragment() {
     private lateinit var sampleAdapter: SampleAdapter
     private lateinit var recyclerView: RecyclerView
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
