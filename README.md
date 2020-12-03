@@ -446,3 +446,12 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
 
 [🔝](https://github.com/CHOSUNGRIM/SOPT_1st_seminar#sopt_27th_android)
+
+
+
+---
+## 🤍6차 세미나 과제🤍
+### 📲 구현 화면
+#### 필수 과제
+
+[🔝](https://github.com/CHOSUNGRIM/SOPT_1st_seminar#sopt_27th_android)
