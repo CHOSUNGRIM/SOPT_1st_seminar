@@ -2,6 +2,7 @@
 * [1차 세미나 과제](https://github.com/CHOSUNGRIM/SOPT_1st_seminar/blob/master/README.md#1%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B3%BC%EC%A0%9C)
 * [2차 세미나 과제](https://github.com/CHOSUNGRIM/SOPT_1st_seminar#2%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B3%BC%EC%A0%9C)
 * [3차 세미나 과제](https://github.com/CHOSUNGRIM/SOPT_1st_seminar/blob/master/README.md#3%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B3%BC%EC%A0%9C)
+* [6차 세미나 과제](https://github.com/CHOSUNGRIM/SOPT_1st_seminar/blob/master/README.md#6%EC%B0%A8-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B3%BC%EC%A0%9C)
 
 ---
 ## 🤍1차 세미나 과제🤍
@@ -444,5 +445,164 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 ```
 
 
+
+[🔝](https://github.com/CHOSUNGRIM/SOPT_1st_seminar#sopt_27th_android)
+
+
+
+---
+## 🤍6차 세미나 과제🤍
+### 📲 구현 화면
+<img src="https://user-images.githubusercontent.com/72273531/101119925-c3b95d00-362f-11eb-8ec4-ff57a14bed78.JPG" width="770" height="450">  
+<img src="https://user-images.githubusercontent.com/72273531/101120029-f6635580-362f-11eb-8043-f6a60c4f412c.JPG" width="770" height="450">  
+<img src="https://user-images.githubusercontent.com/72273531/101120063-02e7ae00-3630-11eb-90cf-6997772f4135.gif" width="230" height="500">  
+
+#### 🟩 필수 과제 ( 로그인 & 회원가입 서버 통신 구현 ) - 2020.12.04 완료  
+1. **PostMan** 으로 서버 API 문서를 확인하고 테스트한다.  
+2. **Retrofit 라이브러리**와 **Gson 라이브러리**를 추가하고 식별 URL을 **Retrofit Interface**로 설계한다.  
+```Kotlin
+interface SoptService {
+    @Headers("Content-Type:application/json")
+    @POST("/users/signin")
+    fun postLogin(
+        @Body body : LoginRequestData
+    ) : Call<LoginResponseData>
+
+    @POST("/users/signup")
+    fun postSignup(
+        @Body body : SignupRequestData
+    ) : Call<SignupResponseData>
+}
+```
+3. 서버 Request/Response 객체를 설계한다.  
+-회원가입을 위한 *SignupRequestData*와 *SignupResponseData*를 만들었다.
+```Kotlin
+data class SignupRequestData (
+    val email: String,
+    val password: String,
+    val userName: String
+)
+```
+```Kotlin
+data class SignupResponseData(
+    val data: SignupRequestData,
+    val message: String,
+    val status: Int,
+    val success: Boolean
+)
+```
+-로그인을 위한 *LoginRequestData*와 *LoginResponseData*를 만들었다.
+```Kotlin
+data class LoginRequestData (
+    val email : String,
+    val password : String
+)
+```
+```Kotlin
+data class LoginResponseData (
+    val data: Data,
+    val message: String,
+    val status: Int,
+    val success: Boolean
+    ) {
+        data class Data(
+            val email: String,
+            val password: String,
+            val userName: String
+        )
+}
+```
+4. Retrofit Interface 실제 구현체를 만든다.
+```Kotlin
+object SoptServiceImpl {
+    private const val BASE_URL = "http://15.164.83.210:3000"
+
+    private val retrofit : Retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    val service : SoptService = retrofit.create(SoptService::class.java)
+}
+```
+5. Callback 등록하여 통신을 요청한다.  
+-회원가입 서버 통신을 위해 *SignUpActivity*에서 통신을 요청한다.
+```Kotlin
+call.enqueue(object : Callback<SignupResponseData> {
+
+                override fun onFailure(call: Call<SignupResponseData>, t: Throwable) {
+                    // 통신 실패 로직
+                }
+
+                override fun onResponse(
+                    call: Call<SignupResponseData>,
+                    response: Response<SignupResponseData>
+                ) {
+                    response.takeIf { it.isSuccessful }
+                        ?.body()
+                        ?.let {
+
+                            Log.d("status",response.body()!!.status.toString())
+                            val intent = Intent()
+                            intent.putExtra("id",SignUp_id_edt.text.toString())
+                            intent.putExtra("pw",SignUp_pw_edt.text.toString())
+                            setResult(Activity.RESULT_OK,intent)
+                            finish()
+
+
+                            if (SignUp_name_edt.text.isNullOrBlank() || SignUp_id_edt.text.isNullOrBlank() || SignUp_pw_edt.text.isNullOrBlank()) {
+                                Toast.makeText(this@SignUpActivity, "모든 칸에 내용을 입력해 주세요", Toast.LENGTH_SHORT).show()
+                            }
+                            else {
+                                Toast.makeText(this@SignUpActivity, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show()
+
+                            }
+                        } ?: showError(response.errorBody())
+                }
+
+                private fun showError(error: ResponseBody?) {
+                    val e = error ?: return
+                    val ob = JSONObject(e.string())
+                    Toast.makeText(this@SignUpActivity, "이미 존재하는 이메일이거나 빈칸이 있습니다.", Toast.LENGTH_SHORT).show()
+                }
+            })
+```
+-로그인 서버 통신을 위해 *LoginActivity*에서 통신을 요청한다.
+```Kotlin
+call.enqueue(object : Callback<LoginResponseData> {
+                override fun onFailure(call: Call<LoginResponseData>, t: Throwable) {
+                    // 통신 실패 로직
+                }
+
+                override fun onResponse(
+                    call: Call<LoginResponseData>,
+                    response: Response<LoginResponseData>
+                ) {
+                    response.takeIf { it.isSuccessful }
+                        ?.body()
+                        ?.let { it ->
+                            saveData()
+
+                            val intent = Intent(this@LoginActivity, ViewPagerActivity::class.java)
+                            startActivity(intent)
+
+                            if (!(login_id_edt.text.isNullOrBlank() || login_pw_edt.text.isNullOrBlank())){
+                                Toast.makeText(this@LoginActivity, "반갑습니다.", Toast.LENGTH_SHORT).show()
+                                val intent = Intent(this@LoginActivity, ViewPagerActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+
+                            loadData()
+                        } ?: showError(response.errorBody())
+                }
+
+                private fun showError(error: ResponseBody?) {
+                    val e = error ?: return
+                    val ob = JSONObject(e.string())
+                    Toast.makeText(this@LoginActivity, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+                }
+            })
+```
 
 [🔝](https://github.com/CHOSUNGRIM/SOPT_1st_seminar#sopt_27th_android)
