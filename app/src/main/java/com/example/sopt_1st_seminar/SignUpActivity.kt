@@ -20,7 +20,6 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
 
         btn_SignUp.setOnClickListener {
-            Log.d("버튼눌림","버튼눌림")
             val call : Call<SignupResponseData> = SoptServiceImpl.service.postSignup(
                 SignupRequestData(
                     SignUp_id_edt.text.toString(),
@@ -51,13 +50,13 @@ class SignUpActivity : AppCompatActivity() {
                             finish()
 
 
-//                            if (SignUp_name_edt.text.isNullOrBlank() || SignUp_id_edt.text.isNullOrBlank() || SignUp_pw_edt.text.isNullOrBlank()) {
-//                                Toast.makeText(this@SignUpActivity, "모든 칸에 내용을 입력해 주세요", Toast.LENGTH_SHORT).show()
-//                            }
-//                            else {
-//                                Toast.makeText(this@SignUpActivity, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show()
-//
-//                            }
+                            if (SignUp_name_edt.text.isNullOrBlank() || SignUp_id_edt.text.isNullOrBlank() || SignUp_pw_edt.text.isNullOrBlank()) {
+                                Toast.makeText(this@SignUpActivity, "모든 칸에 내용을 입력해 주세요", Toast.LENGTH_SHORT).show()
+                            }
+                            else {
+                                Toast.makeText(this@SignUpActivity, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show()
+
+                            }
                         } ?: showError(response.errorBody())
                 }
 
