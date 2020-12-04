@@ -474,7 +474,7 @@ interface SoptService {
     ) : Call<SignupResponseData>
 }
 ```
-3. 서버 Request/Response 객체를 설계한다.
+3. 서버 Request/Response 객체를 설계한다.  
 -회원가입을 위한 *SignupRequestData*와 *SignupResponseData*를 만들었다.
 ```Kotlin
 data class SignupRequestData (
@@ -525,7 +525,7 @@ object SoptServiceImpl {
     val service : SoptService = retrofit.create(SoptService::class.java)
 }
 ```
-5. Callback 등록하여 통신을 요청한다.
+5. Callback 등록하여 통신을 요청한다.  
 -회원가입 서버 통신을 위해 *SignUpActivity*에서 통신을 요청한다.
 ```Kotlin
 call.enqueue(object : Callback<SignupResponseData> {
