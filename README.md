@@ -453,9 +453,10 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 ---
 ## 🤍6차 세미나 과제🤍
 ### 📲 구현 화면
-<img src="https://user-images.githubusercontent.com/72273531/101119925-c3b95d00-362f-11eb-8ec4-ff57a14bed78.JPG">  
-<img src="https://user-images.githubusercontent.com/72273531/101120029-f6635580-362f-11eb-8043-f6a60c4f412c.JPG">  
-<img src="https://user-images.githubusercontent.com/72273531/101120063-02e7ae00-3630-11eb-90cf-6997772f4135.gif">  
+<img src="https://user-images.githubusercontent.com/72273531/101119925-c3b95d00-362f-11eb-8ec4-ff57a14bed78.JPG" width="770" height="450">  
+<img src="https://user-images.githubusercontent.com/72273531/101120029-f6635580-362f-11eb-8043-f6a60c4f412c.JPG" width="770" height="450">  
+<img src="https://user-images.githubusercontent.com/72273531/101120063-02e7ae00-3630-11eb-90cf-6997772f4135.gif" width="230" height="500">  
+
 #### 🟩 필수 과제 ( 로그인 & 회원가입 서버 통신 구현 ) - 2020.12.04 완료  
 
 
